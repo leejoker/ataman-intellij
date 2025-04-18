@@ -4,7 +4,7 @@ import org.jetbrains.intellij.platform.gradle.models.ProductRelease
 
 plugins {
     kotlin("jvm") version "2.0.20"
-    id("org.jetbrains.intellij.platform") version "2.1.0"
+    id("org.jetbrains.intellij.platform") version "2.5.0"
     id("org.jetbrains.kotlinx.kover") version "0.9.0-RC"
 }
 
@@ -46,7 +46,7 @@ kover {
 
 val uiTests by intellijPlatformTesting.testIdeUi.registering {
     this.type = IntelliJPlatformType.IntellijIdeaCommunity
-    version.set("2024.2.3")
+    version.set("2025.1")
     task {
         enabled = gradle.startParameter.taskNames.any { it.contains("uiTests") }
         archiveFile.set(tasks.buildPlugin.flatMap { it.archiveFile })
@@ -71,7 +71,7 @@ repositories {
 }
 
 group = "io.github.mishkun"
-version = "1.3.0"
+version = "1.4.0"
 
 intellijPlatform {
     instrumentCode.set(false)
@@ -85,8 +85,7 @@ intellijPlatform {
         """.trimIndent()
         version = project.version.toString()
         ideaVersion {
-            sinceBuild = "231"
-            untilBuild = "243.*"
+            sinceBuild = "251"
         }
     }
     pluginVerification {
@@ -94,8 +93,7 @@ intellijPlatform {
             select {
                 types.set(listOf(IntelliJPlatformType.IntellijIdeaCommunity))
                 channels.set(listOf(ProductRelease.Channel.RELEASE))
-                sinceBuild = "231"
-                untilBuild = "243.*"
+                sinceBuild = "251"
             }
         }
     }
@@ -103,7 +101,7 @@ intellijPlatform {
 
 dependencies {
     intellijPlatform {
-        intellijIdeaCommunity("2024.2.3")
+        intellijIdeaCommunity("2025.1")
         testFramework(TestFrameworkType.Platform)
         testFramework(TestFrameworkType.Starter, configurationName = "uiTestImplementation")
         pluginVerifier()
